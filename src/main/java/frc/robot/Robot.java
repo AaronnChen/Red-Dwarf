@@ -7,6 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import wpilib;
+
+// check parameter google
+// leads: arm, motor, limit switch, wpilib library, subsystems
+//parameter for DigitalInput(0) should be changed according to the port. Should be duplicated
+//for each port used by limit switch
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -20,7 +26,11 @@ public class Robot extends TimedRobot {
    * initialization code.
    */
   @Override
-  public void robotInit() {}
+  public void robotInit(self) {
+    self.arm_motor = wpilib.VictorSP(3);
+    Joystick self.joystick = new Joystick(0); //joystick assumed(?)
+    DigitalInput self.upLimitSwitch = new DigitalInput(0); // 0 placeholder
+  }
 
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
@@ -48,7 +58,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {}
-  }
+  
 
   /** This function is called once when teleop is enabled. */
   @Override
@@ -56,7 +66,12 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    int output = self.joystick.getY(); //Moves the joystick based on Y value
+        if (self.upLimitSwitch.get()) // Arm is too high, motor output value -1 and 0
+            output = Math.min(output, 0);
+        self.arm_motor.set(output);
+  }
 
   /** This function is called once when the robot is disabled. */
   @Override
