@@ -9,8 +9,8 @@ public class ArmSubsystem extends Subsystem {
 
     public ArmSubsystem() {
         super();
-        self.arm_motor = wpilib.VictorSP(3);
-        DigitalInput self.upLimitSwitch = new DigitalInput(0);
+        arm_motor = wpilib.VictorSP(3); // <- initializing the arm motor?
+        DigitalInput upLimitSwitch = new DigitalInput(0);
     }
 
     public void runArm(double speed) {
