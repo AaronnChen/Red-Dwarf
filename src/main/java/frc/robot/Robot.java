@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit(self) {
-    self.arm_motor = wpilib.VictorSP(3);
+    arm_motor = new VictorSP(3);
     Joystick self.joystick = new Joystick(0); //joystick assumed(?)
     DigitalInput self.upLimitSwitch = new DigitalInput(0); // 0 placeholder
   }
