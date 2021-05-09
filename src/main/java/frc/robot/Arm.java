@@ -9,7 +9,7 @@ public class ArmSubsystem extends Subsystem {
 
     public ArmSubsystem() {
         super();
-        arm_motor = wpilib.VictorSP(3); // <- initializing the arm motor?
+        arm_motor = new VictorSP(3); // <- initializing the arm motor?
         DigitalInput upLimitSwitch = new DigitalInput(0);
     }
 
